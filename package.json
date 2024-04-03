@@ -1,14 +1,17 @@
 {
-  "name": "vtils",
+  "name": "@vorker/utils",
   "version": "0.0.1",
   "description": "",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "main": "dist/lib/index.js",
   "module": "dist/es/index.js",
   "scripts": {
     "build": "rollup --config",
     "build:watch": "rollup --config --watch"
   },
-  "author": "",
+  "author": "wv",
   "license": "ISC",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
@@ -16,5 +19,17 @@
     "@rollup/plugin-typescript": "^11.1.6",
     "rollup": "^4.13.2",
     "tslib": "^2.6.2"
-  }
+  },
+  "types": "./dist/lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wvit/vtils.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "bugs": {
+    "url": "https://github.com/wvit/vtils/issues"
+  },
+  "homepage": "https://github.com/wvit/vtils#readme"
 }

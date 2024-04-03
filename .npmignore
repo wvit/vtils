@@ -1,0 +1,7 @@
+node_modules
+src
+pnpm-lock.yaml
+rollup.config.mjs
+tsconfig.json
+.DS_Store
+.gitignore
