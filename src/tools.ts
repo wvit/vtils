@@ -1,4 +1,4 @@
-import type { Properties } from 'csstype'
+import type { Properties, PropertiesHyphen } from 'csstype'
 
 /** 传入一个时间戳，返回一个日期字符串 */
 export const getDate = ({ time, full, offsetOption = {} }) => {
@@ -48,7 +48,7 @@ export const getId = () => {
 }
 
 /** 将 style 对象转为 htmlElement 上的 style 字符串 */
-export const styleToString = (style: Properties<string | number>) => {
+export const styleToString = (style: Properties | PropertiesHyphen) => {
   const styleString = Object.keys(style).reduce((prev, key) => {
     return `${prev} ${key}:${style[key]};`
   }, '')
