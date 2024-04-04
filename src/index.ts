@@ -6,3 +6,7 @@ export * from './tools'
 export * from './file'
 /** 自定义事件方法 */
 export * from './event'
+/** style值转换 */
+export * from './style'
+/** 定时器相关的方法 */
+export * from './timer'

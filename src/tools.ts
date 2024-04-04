@@ -1,4 +1,4 @@
-import { downloadContent } from './file'
+import { Dom } from './dom'
 
 /** 传入一个时间戳，返回一个日期字符串 */
 export const getDate = ({ time, full, offsetOption = {} }) => {
@@ -47,68 +47,6 @@ export const getId = () => {
   return Math.random().toString().slice(2) + getRandom(9999)
 }
 
-/** 睡眠定时器，一般用于防止触发机器人验证或等待节点加载 */
-export const sleep = (time: number) => {
-  return new Promise<void>(resolve => {
-    const timer = setTimeout(() => {
-      clearTimeout(timer)
-      resolve()
-    }, time)
-  })
-}
-
-/** 定时检测器 */
-export const inspectTimer = (
-  callback: (count: number) => boolean | Promise<boolean>,
-  options?: { time: number; maxCount: number }
-) => {
-  const { time = 20, maxCount = 100 } = options || {}
-  const isAsync = callback.constructor.name === 'AsyncFunction'
-
-  return new Promise<void>(resolve => {
-    let count = 0
-
-    /** 同步函数使用 setIntervalue, 异步函数使用 setTimeout */
-    if (isAsync) {
-      const next = async () => {
-        count++
-
-        try {
-          if (count > maxCount || (await callback(count))) {
-            return resolve()
-          }
-        } catch (e) {
-          console.error('inspectTimer 出错', e)
-          return resolve()
-        }
-
-        const timer = setTimeout(() => {
-          clearTimeout(timer)
-          next()
-        }, time)
-      }
-
-      next()
-    } else {
-      const timer = setInterval(() => {
-        const done = () => {
-          clearInterval(timer)
-          resolve()
-        }
-
-        count++
-
-        try {
-          if (count > maxCount || callback(count)) done()
-        } catch (e) {
-          done()
-          console.error('inspectTimer 出错', e)
-        }
-      }, time)
-    }
-  })
-}
-
 /** 转换 url query 参数 */
 export const urlQuery = {
   /** 获取当前 url query数据 */
@@ -145,12 +83,28 @@ export const urlQuery = {
   },
 }
 
-/** 导出内容 */
-export const exportContent = async (content: any, fileName?: string) => {
-  if (fileName) {
-    downloadContent(content, '')
-  } else {
-    const data = JSON.stringify(content, null, 2)
-    await navigator.clipboard.writeText(data)
-  }
+/** 剪切板功能 */
+export const clipboard = {
+  /** 向剪切板写入文本 */
+  writeText: async content => {
+    try {
+      /** 非 https 页面，浏览器可能会限制 navigator.clipboard 相关api  */
+      await navigator.clipboard.writeText(content)
+    } catch (e) {
+      /** 降级使用 document.execCommand 复制文本 */
+      const copyNode = Dom.create('textarea', {
+        style: 'position:absolute;opacity: 0;',
+      })
+      const body = Dom.query('body')
+
+      body.appendChild(copyNode)
+      copyNode.value = content
+      copyNode.select()
+      document.execCommand('Copy')
+      body.removeChild(copyNode)
+    }
+  },
+
+  /** TODO：读取剪切板内容 */
+  read: () => {},
 }

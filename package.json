@@ -1,6 +1,6 @@
 {
   "name": "@vorker/utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -13,13 +13,6 @@
   },
   "author": "wv",
   "license": "ISC",
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "rollup": "^4.13.2",
-    "tslib": "^2.6.2"
-  },
   "types": "./dist/lib/index.d.ts",
   "repository": {
     "type": "git",
@@ -31,5 +24,15 @@
   "bugs": {
     "url": "https://github.com/wvit/vtils/issues"
   },
-  "homepage": "https://github.com/wvit/vtils#readme"
+  "homepage": "https://github.com/wvit/vtils#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.13.2",
+    "tslib": "^2.6.2"
+  },
+  "dependencies": {
+    "csstype": "^3.1.3"
+  }
 }

@@ -69,6 +69,7 @@ export class Dom {
   static setMethods(node: Node): Node {
     if (!node) return node
 
+    /** 节点的属性操作 */
     node.attr = (key: string, value?: unknown): any => {
       if (value) {
         node.setAttribute(key, value as string)
