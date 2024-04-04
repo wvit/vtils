@@ -1,4 +1,4 @@
-import { Dom } from './dom'
+import type { Properties } from 'csstype'
 
 /** 传入一个时间戳，返回一个日期字符串 */
 export const getDate = ({ time, full, offsetOption = {} }) => {
@@ -47,64 +47,10 @@ export const getId = () => {
   return Math.random().toString().slice(2) + getRandom(9999)
 }
 
-/** 转换 url query 参数 */
-export const urlQuery = {
-  /** 获取当前 url query数据 */
-  getQuery: () => {
-    const query = urlQuery.parse(location?.search) || {}
-    return query
-  },
-
-  /** 将 url 中 query 参数提取出来 */
-  parse: (url: string) => {
-    const queryString = url.split('?')[1] || url.split('?')[0]
-
-    return queryString
-      .split('&')
-      .reduce<any>((query: Record<string, any>, item: string) => {
-        const [key, value] = item.split('=').map(decodeURIComponent)
-
-        if (key) {
-          query[key] = value
-          return query
-        }
-      }, {})
-  },
-
-  /** 将对象拼接为 queryString */
-  stringify: (query: Record<string, any>, url?) => {
-    const queryString = Object.keys(query)
-      .map(
-        key => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
-      )
-      .join('&')
-
-    return url ? `${url}?${queryString}` : queryString
-  },
-}
-
-/** 剪切板功能 */
-export const clipboard = {
-  /** 向剪切板写入文本 */
-  writeText: async content => {
-    try {
-      /** 非 https 页面，浏览器可能会限制 navigator.clipboard 相关api  */
-      await navigator.clipboard.writeText(content)
-    } catch (e) {
-      /** 降级使用 document.execCommand 复制文本 */
-      const copyNode = Dom.create('textarea', {
-        style: 'position:absolute;opacity: 0;',
-      })
-      const body = Dom.query('body')
-
-      body.appendChild(copyNode)
-      copyNode.value = content
-      copyNode.select()
-      document.execCommand('Copy')
-      body.removeChild(copyNode)
-    }
-  },
-
-  /** TODO：读取剪切板内容 */
-  read: () => {},
+/** 将 style 对象转为 htmlElement 上的 style 字符串 */
+export const styleToString = (style: Properties<string | number>) => {
+  const styleString = Object.keys(style).reduce((prev, key) => {
+    return `${prev} ${key}:${style[key]};`
+  }, '')
+  return styleString
 }

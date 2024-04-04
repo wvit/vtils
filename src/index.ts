@@ -2,11 +2,13 @@
 export * from './dom'
 /** 简单零散工具方法 */
 export * from './tools'
-/** 处理文件方法 */
-export * from './file'
-/** 自定义事件方法 */
+/** 自定义事件 */
 export * from './event'
-/** style值转换 */
-export * from './style'
+/** 处理文件相关方法 */
+export * from './file'
+/** 剪切板相关方法 */
+export * from './clipboard'
 /** 定时器相关的方法 */
 export * from './timer'
+/** querystring 相关方法 */
+export * from './qs'
