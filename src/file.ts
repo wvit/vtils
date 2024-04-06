@@ -1,7 +1,7 @@
 import { Dom } from './dom'
 
 /** 将文件转为base64 */
-export const getBase64 = (file): Promise<string> => {
+export const getBase64 = (file: Blob): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.readAsDataURL(file)
