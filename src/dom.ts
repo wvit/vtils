@@ -39,7 +39,7 @@ export class Dom {
   }
 
   /** 获取多个节点 */
-  static queryAll(select: string, parent?: Node) {
+  static queryAll(select: string, parent?: Node | Document) {
     const nodeList = (parent || document).querySelectorAll(
       select
     ) as unknown as Node[]
