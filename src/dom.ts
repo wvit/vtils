@@ -23,9 +23,6 @@ type Node = HTMLElement &
     style: any
   }
 
-/** 节点列表类型 */
-type NodeList = NodeListOf<Node>
-
 /** 一些简化操作Dom的方法 */
 export class Dom {
   /** 获取单个节点 */
@@ -42,10 +39,14 @@ export class Dom {
   }
 
   /** 获取多个节点 */
-  static queryAll(select: string, parent?: Node): NodeList {
-    const nodeList = (parent || document).querySelectorAll(select) as NodeList
+  static queryAll(select: string, parent?: Node) {
+    const nodeList = (parent || document).querySelectorAll(
+      select
+    ) as unknown as Node[]
+
     nodeList.forEach(node => Dom.setMethods(node))
-    return nodeList
+
+    return Array.from(nodeList)
   }
 
   /** 创建节点 */
