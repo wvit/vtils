@@ -15,7 +15,7 @@
  */
 export const getDate = (
   time: number,
-  options: {
+  options?: {
     full?: boolean
     offsetHour?: number
   }
