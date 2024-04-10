@@ -1,6 +1,6 @@
 {
   "name": "@vorker/utils",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -10,6 +10,7 @@
   "scripts": {
     "build": "rollup --config",
     "doc": "typedoc src/index.ts",
+    "pub": "npm run build && npm pub",
     "doc:watch": "typedoc --watch src/index.ts",
     "build:watch": "rollup --config --watch"
   },
@@ -26,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/wvit/vtils/issues"
   },
-  "homepage": "https://github.com/wvit/vtils#readme",
+  "homepage": "https://wvit.github.io/vtils/",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
