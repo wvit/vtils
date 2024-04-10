@@ -12,3 +12,5 @@ export * from './clipboard'
 export * from './timer'
 /** querystring 相关方法 */
 export * from './qs'
+/** 日期时间相关方法 */
+export * from './date'

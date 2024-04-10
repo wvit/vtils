@@ -13,8 +13,26 @@ export class Event {
     this.dbclickTimer = null as unknown as number
   }
 
-  /** 双击事件 */
-  dbclick = (callback?, ...params) => {
+  /**
+   * 双击事件
+   *
+   * @param callback - 触发双击时调用的回调函数
+   * @param [params] - 传给回调函数的rest参数
+   * 
+   * @example
+   * ```
+   * // 初始化
+   * const event = new Event()
+   * // 需要执行的 双击 删除方法
+   * const delete = e => { } 
+   * // 在 jsx 或其他场景中使用
+   * <div onClick={e => event.dbclick(delete, e)}></div>
+   * ```
+   */
+  dbclick = <T extends any[]>(
+    callback: (...params: T) => void,
+    ...params: T
+  ) => {
     this.dbclickCount++
 
     if (this.dbclickCount >= 2) {

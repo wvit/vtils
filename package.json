@@ -9,6 +9,8 @@
   "module": "dist/es/index.js",
   "scripts": {
     "build": "rollup --config",
+    "doc": "typedoc src/index.ts",
+    "doc:watch": "typedoc --watch src/index.ts",
     "build:watch": "rollup --config --watch"
   },
   "author": "wv",
@@ -30,7 +32,8 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
     "rollup": "^4.13.2",
-    "tslib": "^2.6.2"
+    "tslib": "^2.6.2",
+    "typedoc": "^0.25.13"
   },
   "dependencies": {
     "csstype": "^3.1.3"
