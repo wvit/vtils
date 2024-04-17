@@ -1,11 +1,11 @@
 /** querystring 相关方法 */
 export const qs = {
-  /** 
+  /**
    * 获取当前 url query数据
-   * 
+   *
    * @returns 返回当前 location.href 上的 query 参数
-   * 
-   * @example 
+   *
+   * @example
    * ```
    * // 获取当前 location.href="/detail?id=1&name=test" 的 query参数
    * const queryData = qs.getQuery()
@@ -18,14 +18,14 @@ export const qs = {
     return query
   },
 
-  /** 
+  /**
    * 将 url 中 query 参数提取出来
-   * 
+   *
    * @param url - 需要提取 query 参数的 url 字符串
-   * 
+   *
    * @returns 返回 url 上 query 参数
-   * 
-   * @example 
+   *
+   * @example
    * ```
    * const queryData = qs.parse('/detail?id=1&name=test')
    * // 输出：{ id: '1', name: 'test' }
@@ -47,14 +47,14 @@ export const qs = {
       }, {})
   },
 
-  /** 
+  /**
    * 将对象拼接为 queryString
-   * 
+   *
    * @param query - query 参数对象
    * @param [url] -  需要拼接的 url
-   * 
+   *
    * @returns 返回一个带有 query 参数的 url 字符串
-   * 
+   *
    * @example
    * ```
    * const url = qs.stringify({ id: 1, name: 'test' }, '/detail')
@@ -69,6 +69,6 @@ export const qs = {
       )
       .join('&')
 
-    return url ? `${url}?${queryString}` : queryString
+    return url !== undefined ? `${url}?${queryString}` : queryString
   },
 }
