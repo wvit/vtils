@@ -23,7 +23,7 @@ export const sleep = (time: number) => {
  *
  * @param callback - 回调函数，返回布尔值来判断检测是否完成
  * @param [options.time] - 间隔多少 毫秒 检测一次。默认为 20
- * @param options.maxCount - 最多检测多少次。默认为 100
+ * @param [options.maxCount] - 最多检测多少次。默认为 100
  *
  * @example
  * ```
@@ -36,7 +36,7 @@ export const sleep = (time: number) => {
  */
 export const inspectTimer = (
   callback: (count: number) => boolean | Promise<boolean>,
-  options?: { time: number; maxCount: number }
+  options?: { time?: number; maxCount?: number }
 ) => {
   const { time = 20, maxCount = 100 } = options || {}
   const isAsync = callback.constructor.name === 'AsyncFunction'

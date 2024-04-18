@@ -2,12 +2,12 @@ import { dom } from './dom'
 
 /** 剪切板功能 */
 export const clipboard = {
-  /** 
+  /**
    * 向剪切板写入文本
-   * 
+   *
    * @param content - 需要复制的文本内容
-   * 
-   * @example 
+   *
+   * @example
    * ```
    * // 复制 “hello” 到剪切板
    * await clipboard.writeText('hello')
@@ -22,13 +22,12 @@ export const clipboard = {
       const copyNode = dom.create('textarea', {
         style: 'position:absolute;opacity: 0;',
       })
-      const body = dom.query('body')
 
-      body.appendChild(copyNode)
+      dom.query('body').add(copyNode)
       copyNode.value = content
       copyNode.select()
       document.execCommand('Copy')
-      body.removeChild(copyNode)
+      copyNode.remove()
     }
   },
 
