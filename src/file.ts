@@ -3,24 +3,39 @@ import { dom } from './dom'
 /**
  * 将文件转为 base64
  *
- * @param file - 需要转为 base64 的文件
+ * @param file - 需要获取内容的文件
+ * @param type - 需要将文件转为什么类型的内容。默认为 "base64"
  *
- * @returns 返回一个 base64 字符串
+ * @returns 返回内容
  *
  * @example
  * ```
  * // 获取一个图片的 blob
  * const imgBlob = await fetch('/test.png').then(res => res.blob())
- * // 转为 base64
+ * // 获取 json 文件的 blob
+ * const jsonBlob = await fetch('/test.json').then(res => res.blob())
+ * 
+ * // 获取图片的base64
  * const imgBase64 = await getBase64(imgBlob)
+ * // 获取 json 文件内容
+ * const jsonContent = await getBase64(jsonBlob, 'text')
  * ```
  */
-export const getBase64 = (file: Blob): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
+export const getFileData = (
+  file: Blob,
+  type?: 'text' | 'base64'
+): Promise<string> => {
+  const reader = new FileReader()
+
+  return new Promise(resolve => {
     reader.onload = () => resolve(reader.result as string)
-    reader.onerror = e => reject(e)
+    reader.onerror = () => resolve('')
+
+    if (type === 'text') {
+      reader.readAsText(file)
+    } else {
+      reader.readAsDataURL(file)
+    }
   })
 }
 
